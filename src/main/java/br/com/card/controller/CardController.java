@@ -1,5 +1,6 @@
 package br.com.card.controller;
 
+import br.com.card.dto.TransactionDTO;
 import br.com.card.entity.Transaction;
 import br.com.card.repository.CardRepository;
 import br.com.card.service.TransactionService;
@@ -14,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
 import java.net.URI;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 public class CardController {
@@ -22,8 +24,7 @@ public class CardController {
     private TransactionService service;
 
     @Autowired
-    public CardController(TransactionService service, CardRepository cardRepository){
-        this.cardRepository = cardRepository;
+    public CardController(TransactionService service){
         this.service = service;
 
     }
@@ -34,9 +35,10 @@ public class CardController {
       return ResponseEntity.created(uri).build();
     }
     @RequestMapping(path = "/transactions/all", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Transaction>> findAll() {
+    public ResponseEntity<List<TransactionDTO>> findAll() {
         List<Transaction> list = service.findAll();
-         return ResponseEntity.ok().body(list);
+        List<TransactionDTO> listDto = list.stream().map(x -> new TransactionDTO(x)).collect(Collectors.toList());
+         return ResponseEntity.ok().body(listDto);
     }
 //    @RequestMapping(path = "/transactions/{id}", method = RequestMethod.PUT, produces = MediaType.APPLICATION_JSON_VALUE)
 //    public ResponseEntity<Void> update(@RequestBody Transaction transaction, @PathVariable String id) {
