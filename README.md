@@ -36,8 +36,13 @@ Este projeto utiliza a base de dados MongoDB, considerando o seguinte modelo de 
   "cardApplication": "VOUCHER",
   "status": "CANCELED"
 }
+## Como gerar os testes e o html de cobertura
 
-- Abrir o arquivo target/site/jacoco/index.html
+- Na pasta raiz, executar:
+```bash
+./mvnw verify
+```
+- Abrir o arquivo target/site/jacoco/index.htm
 
 ## Acessar o swagger
 
