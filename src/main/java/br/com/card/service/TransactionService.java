@@ -16,19 +16,12 @@ public class TransactionService {
     public List<Transaction> findAll() {
         return cardRepository.findAll();
     }
-    public Transaction insert(Transaction transaction){
+
+    public Transaction insert(Transaction transaction) {
         return cardRepository.insert(transaction);
     }
-
-//    public Transaction update(Transaction obj){
-//        Transaction newObj = cardRepository.findOne();
-//        updateTransaction(newObj, obj);
-//        return cardRepository.save(newObj);
-//    }
-//    private void updateTransaction(Transaction newtransaction, Transaction transaction) {
-//        newtransaction.setStatus(transaction.getStatus());
-//        newtransaction.setCardApplication(transaction.getCardApplication());
-//        newtransaction.setValue(transaction.getValue());
-//    }
+    public Transaction update(Transaction transaction) {
+        return cardRepository.save(transaction);
+    }
 
 }
