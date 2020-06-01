@@ -11,6 +11,7 @@ import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import javax.validation.constraints.NotEmpty;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalTime;
@@ -25,13 +26,20 @@ public class Transaction {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd/MM/yyyy")
     @JsonSerialize(using = LocalDateSerializer.class)
+    @NotEmpty(message = "Data é obrigatório")
     private LocalDate date;
 
     @JsonFormat(pattern = ("HH:mm:ss"))
+    @NotEmpty(message = "Time é obrigatório")
     private LocalTime time;
 
+    @NotEmpty(message = "Value é obrigatório")
     private BigDecimal value;
+
+    @NotEmpty(message = "não pode ser nulo")
     private CardApplication cardApplication;
+
+    @NotEmpty(message = "não pode ser nulo")
     private PaymentStatus status;
 
     public Transaction() {
